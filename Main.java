@@ -15,13 +15,13 @@ public class Main
      */
     public static void main(String[] args)
     {
-        int[] hea = new int[12];
+        Comparable[] hea = new Comparable[12];
         for(int x = 1; x <= 12; x++)
         {
-            hea[x] = (int)Math.random()*100;
+            hea[x] = ((int)Math.random()*100);
         }
         HeapDisplay hD = new HeapDisplay();
-        hD.displayHeap((Comparable)hetea, 12);
+        hD.displayHeap(hea, 12);
     }
 
     /**
