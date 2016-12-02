@@ -1,4 +1,3 @@
-
 /**
  * Write a description of class Main here.
  * 
@@ -7,32 +6,17 @@
  */
 public class Main
 {
-    // instance variables - replace the example below with your own
-    private int x;
-
     /**
-     * Main method,
+     * Main method
      */
     public static void main(String[] args)
     {
-        Comparable[] hea = new Comparable[12];
-        for(int x = 1; x <= 12; x++)
+        Comparable[] array = new Integer[12];
+        for(int x = 0; x < 12; x++)
         {
-            hea[x] = ((int)Math.random()*100);
+            array[x] = ((int)(Math.random()*100)) + 1;
         }
-        HeapDisplay hD = new HeapDisplay();
-        hD.displayHeap(hea, 12);
-    }
-
-    /**
-     * An example of a method - replace this comment with your own
-     * 
-     * @param  y   a sample parameter for a method
-     * @return     the sum of x and y 
-     */
-    public int sampleMethod(int y)
-    {
-        // put your code here
-        return x + y;
+        HeapDisplay hd = new HeapDisplay();
+        hd.displayHeap(array, 11);
     }
 }
