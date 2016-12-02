@@ -16,7 +16,7 @@ public class HeapUtils
     }
 
     /**
-     * Swaps to elements in an array
+     * Swaps two elements in an array
      */
     private static void swap(Comparable[] heap, int firstIndex, int secondIndex)
     {
