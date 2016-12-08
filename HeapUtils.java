@@ -16,9 +16,31 @@ public class HeapUtils
      * @param   heapSize    Size of the heap
      * 
      * Big-O: n
+     * 
+     * MAKES sure its the maximum in the heap
      */
     public static void heapify(Comparable[] heap, int index, int heapSize)
     {
+        int maxIndex = index;
+        if (heapSize > index * 2)
+        {
+            if(heap[index * 2].compareTo(heap[maxIndex]) > 0)
+            {
+                maxIndex = index*2;
+            }
+            else if (heapSize > index * 2 + 1)
+            {
+                if(heap[index * 2 + 1].compareTo(heap[maxIndex]) < 0)
+                {
+                    maxIndex = index * 2 + 1;
+                }
+            }
+            if(maxIndex != index)
+            {
+                swap(heap, index, maxIndex);
+                heapify(heap, maxIndex, heapSize);
+            }
+        }
     }
 
     /**
@@ -49,6 +71,10 @@ public class HeapUtils
      */
     public static void buildHeap(Comparable[] heap, int heapSize)
     {
+        for (int i = heapSize/2; i >=1; i--)
+        {
+            heapify(heap, i, heapSize);
+        }
     }
 
     /**
@@ -63,7 +89,10 @@ public class HeapUtils
      */
     public static Comparable remove(Comparable[] heap, int heapSize)
     {  
-        return true;
+        int index = 1;
+        swap(heap, index, heapSize-1);
+        heapSize--;
+        return heap[heapSize-1];
     }
 
     /**
@@ -73,6 +102,20 @@ public class HeapUtils
      */
     public static Comparable[] insert(Comparable[] heap, Comparable item, int heapSize)
     {
-        return null;
+        Comparable[] values = new Comparable[heap.length + 1];
+        for (int i = 0; i < heap.length; i++)
+        {
+            values[i] = heap[i];
+        }
+        values[heap.length-1] = item;
+        return values;
+    }
+    
+    /**
+     * Big-O
+     */
+    public void heapSort(Comparable[] heap)
+    {
+        
     }
 }
