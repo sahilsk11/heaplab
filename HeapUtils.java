@@ -22,23 +22,23 @@ public class HeapUtils
     public static void heapify(Comparable[] heap, int index, int heapSize)
     {
         int maxIndex = index;
-        if (heapSize > index * 2)
+
+        if (heapSize < index * 2 + 1 && heapSize == index * 2)
         {
-            if(heap[index * 2].compareTo(heap[maxIndex]) > 0)
+            if (heap[index * 2].compareTo(heap[index]) > 0)
             {
-                maxIndex = index*2;
+                swap(heap, index * 2, index);
             }
-            else if (heapSize > index * 2 + 1)
+        }
+        else if (heap[index * 2].compareTo(heap[index]) > 0 || heap[index * 2 + 1].compareTo(heap[index]) > 0)
+        {
+            if (heap[index * 2 + 1].compareTo(heap[index * 2]) > 0)
             {
-                if(heap[index * 2 + 1].compareTo(heap[maxIndex]) < 0)
-                {
-                    maxIndex = index * 2 + 1;
-                }
+                swap(heap, index * 2 + 1, index);
             }
-            if(maxIndex != index)
+            else if (heap[index * 2].compareTo(heap[index * 2 + 1]) > 0)
             {
-                swap(heap, index, maxIndex);
-                heapify(heap, maxIndex, heapSize);
+                swap(heap, index * 2, index);
             }
         }
     }
@@ -89,33 +89,37 @@ public class HeapUtils
      */
     public static Comparable remove(Comparable[] heap, int heapSize)
     {  
-        int index = 1;
-        swap(heap, index, heapSize-1);
+        swap(heap, 1, heapSize);
         heapSize--;
-        return heap[heapSize-1];
+        return heap[heapSize];
     }
 
-    /**
-     * Adds an item to the heap, creates a new array, copies all the values
+    /***     * Adds an item to the heap, creates a new array, copies all the values
      * 
      * Big-O:
      */
     public static Comparable[] insert(Comparable[] heap, Comparable item, int heapSize)
     {
         Comparable[] values = new Comparable[heap.length + 1];
-        for (int i = 0; i < heap.length; i++)
+        for (int i = 1; i < heap.length; i++)
         {
             values[i] = heap[i];
         }
-        values[heap.length-1] = item;
+        values[values.length-1] = item;
+        buildHeap(values, values.length-1);
         return values;
     }
-    
+
     /**
      * Big-O
      */
-    public void heapSort(Comparable[] heap)
+    public void heapSort(Comparable[] heap, int heapSize)
     {
-        
+        while (heapSize >= 1)
+        {
+            buildHeap(heap, heapSize);
+            remove(heap, heapSize);
+            heapSize--;
+        }
     }
 }

@@ -18,5 +18,7 @@ public class Main
         }
         HeapDisplay hd = new HeapDisplay();
         hd.displayHeap(array, 11);
+        array = HeapUtils.insert(array, new Integer(5), 11);
+        hd.displayHeap(array, 12);
     }
 }
